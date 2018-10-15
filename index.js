@@ -3,6 +3,7 @@ import graphqlHTTP from 'express-graphql';
 import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from './schema';
 import resolvers from './resolvers';
+import models from './models';
 
 const schema = makeExecutableSchema({
   typeDefs,
