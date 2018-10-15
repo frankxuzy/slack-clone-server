@@ -20,6 +20,6 @@ app.use('/graphql', graphqlHTTP({
 
 // force: true drop all tables before start then redo it
 // models.sequelize.sync({ force: true }).then(() => {
-models.sequelize.sync().then(() => {
+models.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 });
