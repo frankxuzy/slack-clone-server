@@ -18,4 +18,6 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+models.sequelize.sync().then(() => {
+  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+});
