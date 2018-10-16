@@ -6,6 +6,6 @@ export default `
   }
 
   type Mutation {
-    createTeam(name: String!): Boolean
+    createTeam(name: String!): Boolean!
   }
 `;
