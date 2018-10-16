@@ -21,7 +21,12 @@ const app = express();
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true,
-  context: { models },
+  context: {
+    models,
+    user: {
+      id: 1,
+    },
+  },
 }));
 
 // force: true drop all tables before start then redo it
