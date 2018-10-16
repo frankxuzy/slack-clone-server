@@ -21,10 +21,11 @@ const app = express();
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true,
+  context: { models },
 }));
 
 // force: true drop all tables before start then redo it
 // models.sequelize.sync({ force: true }).then(() => {
-models.sequelize.sync({ force: true }).then(() => {
+models.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 });
