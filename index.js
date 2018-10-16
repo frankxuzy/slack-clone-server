@@ -23,6 +23,7 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
   context: {
     models,
+    // only bind owner to user 1 for now
     user: {
       id: 1,
     },
