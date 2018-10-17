@@ -9,6 +9,7 @@ const sequelize = new Sequelize(
     define: {
       underscored: true,
     },
+    operatorsAliases: false,
   },
 );
 
