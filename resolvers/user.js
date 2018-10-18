@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { formatErrors } from '../utils/utils';
 
 const saltRounds = 12;
 export default {
@@ -9,11 +10,23 @@ export default {
   Mutation: {
     register: async (parent, { password, ...otherArgs }, { models }) => {
       try {
+        if (password.length < 8 || password.length > 20) {
+          return {
+            ok: false,
+            errors: [{ path: 'password', message: 'The password length can only between 8 and 20 characters long' }],
+          };
+        }
         const hashedPassword = await bcrypt.hash(password, saltRounds);
-        await models.User.create({ ...otherArgs, hashedPassword });
-        return true;
+        const user = await models.User.create({ ...otherArgs, password: hashedPassword });
+        return {
+          ok: true,
+          user,
+        };
       } catch (err) {
-        return false;
+        return {
+          ok: false,
+          errors: formatErrors(err, models),
+        };
       }
     },
   },
