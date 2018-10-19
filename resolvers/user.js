@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { formatErrors } from '../utils/utils';
+import { tryLogin } from '../utils/auth';
 
 const saltRounds = 12;
 export default {
@@ -29,5 +30,6 @@ export default {
         };
       }
     },
+    login: (parent, { email, password }, { models, SECRET, SECRET2 }) => tryLogin(email, password, models, SECRET, SECRET2),
   },
 };

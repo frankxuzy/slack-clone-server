@@ -6,7 +6,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 import cors from 'cors';
 import models from './models';
 
-
+const SECRET = '98q34riunskjvb9e7wiqbdlksandf';
+const SECRET2 = 'hqwkrj2983isubdf4893qkjeefowqrifhc90u4q5';
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')), { all: true });
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')), { all: true });
 const schema = makeExecutableSchema({
@@ -25,6 +26,8 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
   context: {
     models,
+    SECRET,
+    SECRET2,
     // only bind owner to user 1 for now
     user: {
       id: 1,
