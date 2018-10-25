@@ -1,6 +1,11 @@
 import { formatErrors, requiresAuth } from '../utils/utils';
 
 export default {
+  Query: {
+    allTeams: requiresAuth.createResolver(
+      (parent, args, { models, user }) => models.Team.findAll({ owner: user.id }, { raw: true }),
+    ),
+  },
   Mutation: {
     createTeam: requiresAuth.createResolver(async (parent, args, { models, user }) => {
       try {
@@ -15,5 +20,8 @@ export default {
         };
       }
     }),
+  },
+  Team: {
+    channels: (parent, args, { models }) => models.Channel.findAll({ teamId: parent.id }),
   },
 };

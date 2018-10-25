@@ -52,7 +52,7 @@ app.use('/graphql', graphqlHTTP(req => ({
     models,
     SECRET,
     SECRET2,
-    // only bind owner to user 1 for now
+    // req.user comes from app.use(addUser)
     user: req.user,
   },
 })));

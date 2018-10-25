@@ -5,7 +5,6 @@ export default {
         await models.Channel.create(args);
         return true;
       } catch (err) {
-        console.log(err);
         return false;
       }
     },
@@ -15,7 +14,6 @@ export default {
       try {
         return await models.Channel.findOne({ where: { id } });
       } catch (err) {
-        console.log(err);
         return false;
       }
     },
