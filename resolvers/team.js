@@ -16,6 +16,7 @@ export default {
           team_id: newTeam.id,
         });
         return {
+          team: newTeam,
           ok: true,
         };
       } catch (err) {
