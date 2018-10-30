@@ -38,7 +38,7 @@ export default {
     createTeam: requiresAuth.createResolver(async (parent, args, { models, user }) => {
       try {
         // transaction: if team create err or channel create err nither will be create, err will be catched.
-        const response = models.sequelize.transaction(
+        const response = await models.sequelize.transaction(
           async () => {
             const newTeam = await models.Team.create({ ...args, owner: user.id });
             await models.Channel.create({
