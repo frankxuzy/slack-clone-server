@@ -15,7 +15,7 @@ export default (sequelize, DataTypes) => {
   Team.associate = (models) => {
     // M to N
     Team.belongsToMany(models.User, {
-      through: 'member',
+      through: models.Member,
       foreignKey: 'team_id',
     });
     // 1 to N

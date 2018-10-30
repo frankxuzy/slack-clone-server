@@ -60,5 +60,6 @@ app.use('/graphql', graphqlHTTP(req => ({
 // force: true drop all tables before start then redo it
 // models.sequelize.sync({ force: true }).then(() => {
 models.sequelize.sync().then(() => {
+  // eslint-disable-next-line
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 });
