@@ -14,7 +14,8 @@ export default `
   }
 
   type Query {
-    allTeams: [Team!]!  
+    allTeams: [Team!]!
+    inviteTeams: [Team!]!
   }
 
   type VoidResponse {
