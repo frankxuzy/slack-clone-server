@@ -1,10 +1,21 @@
+import { requiresAuth } from '../utils/utils';
 
 export default {
+  Message: {
+    user: ({user_id}, args, { models }) => models.User.findOne({
+      where: { id: user_id },
+      raw: true,
+    }),
+  },
   Query: {
-    messages: async (parent, args, { models, user }) => [],
+    messages: requiresAuth.createResolver(async (
+      parent,
+      { channel_id },
+      { models },
+    ) => models.Message.findAll({ where: { channel_id }, raw: true })),
   },
   Mutation: {
-    createMessage: async (parent, args, { models, user }) => {
+    createMessage: requiresAuth.createResolver(async (parent, args, { models, user }) => {
       try {
         await models.Message.create({
           ...args,
@@ -14,7 +25,7 @@ export default {
       } catch (err) {
         return false;
       }
-    },
+    }),
   },
   // Query: {
   //   getChannel: async (parent, { models }) => {
