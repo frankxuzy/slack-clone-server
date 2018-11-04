@@ -5,6 +5,10 @@ import graphqlHTTP from 'express-graphql';
 import { makeExecutableSchema } from 'graphql-tools';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
+import { createServer } from 'http';
+import { execute, subscribe } from 'graphql';
+// import { PubSub } from 'graphql-subscriptions';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
 
 import models from './models';
 import { refreshTokens } from './utils/auth';
@@ -57,9 +61,21 @@ app.use('/graphql', graphqlHTTP(req => ({
   },
 })));
 
+const server = createServer(app);
+
 // force: true drop all tables before start then redo it
 // models.sequelize.sync({ force: true }).then(() => {
 models.sequelize.sync().then(() => {
   // eslint-disable-next-line
-  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+  server.listen(PORT, () => {
+    // eslint-disable-next-line no-new
+    new SubscriptionServer({
+      execute,
+      subscribe,
+      schema,
+    }, {
+      server,
+      path: '/subscriptions',
+    });
+  });
 });
