@@ -24,12 +24,14 @@
     "cors": "^2.8.4",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
-    "graphql": "^0.13.1",
+    "graphql": "^0.13.2",
+    "graphql-subscriptions": "^1.0.0",
     "graphql-tools": "^4.0.1",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
     "merge-graphql-schemas": "^1.5.7",
     "pg": "^7.5.0",
-    "sequelize": "^4.39.0"
+    "sequelize": "^4.39.0",
+    "subscriptions-transport-ws": "^0.9.15"
   }
 }
