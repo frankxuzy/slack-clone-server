@@ -12,7 +12,7 @@ export default {
       parent,
       { channel_id },
       { models },
-    ) => models.Message.findAll({ where: { channel_id }, raw: true })),
+    ) => models.Message.findAll({ order: [['created_at', 'ASC']], where: { channel_id }, raw: true })),
   },
   Mutation: {
     createMessage: requiresAuth.createResolver(async (parent, args, { models, user }) => {
